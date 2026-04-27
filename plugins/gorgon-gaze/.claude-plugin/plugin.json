@@ -1,0 +1,16 @@
+{
+  "name": "gorgon-gaze",
+  "description": "Captures the initial codebase snapshot on SessionStart and refreshes on UserPromptSubmit focus shifts. Runs G1 Tarjan SCC + G3 PageRank over the AST-resolved import graph and persists state/snapshot.json atomically.",
+  "version": "0.1.0",
+  "author": {
+    "name": "enchanted-plugins"
+  },
+  "license": "MIT",
+  "keywords": [
+    "snapshot",
+    "import-graph",
+    "tarjan",
+    "pagerank",
+    "structural-intelligence"
+  ]
+}

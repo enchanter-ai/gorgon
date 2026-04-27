@@ -1,0 +1,29 @@
+{
+  "description": "gorgon-gaze hooks — advisory-only, fail-open. Capture snapshot on SessionStart; refresh on UserPromptSubmit focus shifts.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/session-start/capture-snapshot.sh\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/user-prompt-submit/refresh-snapshot.sh\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}

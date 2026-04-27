@@ -1,0 +1,21 @@
+{
+  "name": "gorgon-hotspots",
+  "description": "Top-N hotspot ranking with bootstrap 95% CI per file. Reads state/snapshot.json and returns (path, score, ci_low, ci_high, N, hotspot_kind) tuples. Use when the user runs /gorgon:hotspots or asks which files matter most.",
+  "version": "0.1.0",
+  "author": {
+    "name": "enchanted-plugins"
+  },
+  "license": "MIT",
+  "keywords": [
+    "hotspots",
+    "ranking",
+    "centrality",
+    "pagerank"
+  ],
+  "skills": [
+    "./skills/hotspots-report/"
+  ],
+  "commands": [
+    "./commands/hotspots.md"
+  ]
+}

@@ -241,6 +241,10 @@ applied across all plugins.
 - **Alex Modder and Raptorfarian** — Ice and Fire (2018) — the Minecraft mod whose Gorgon entity gave this plugin its name and metaphor.
 - **@enchanted-plugins** siblings — Wixie, Emu, Crow, Hydra, Lich, Sylph, Pech, Djinn, Naga — for the canonical template, the event-bus pattern, and the ecosystem contract.
 
+## Versioning & release cadence
+
+Gorgon follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html). Breaking changes to engine signatures, event payloads, or the honest-numbers tuple shape bump the major version. Additive engines or sub-plugins bump the minor. Bug fixes bump the patch. See [CHANGELOG.md](CHANGELOG.md) for the running history.
+
 ## License
 
 MIT — see [LICENSE](LICENSE).

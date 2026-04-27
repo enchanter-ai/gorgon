@@ -61,6 +61,21 @@ Not for:
 ## How It Works
 
 On `SessionStart`, **gorgon-gaze** walks `*.py` files in the project root,
+
+<p align="center">
+  <a href="docs/assets/pipeline.mmd" title="View pipeline source (Mermaid)">
+    <img src="docs/assets/pipeline.svg"
+         alt="Gorgon six-subplugin architecture blueprint — Claude Code session input flowing through gorgon-gaze (G1 Tarjan + G3 PageRank full snapshot at SessionStart), gorgon-watcher (G1 + G2 incremental refresh on PostToolUse), three skill-invoked sub-plugins (gorgon-hotspots G3 ranking, gorgon-deps G1 BFS neighbourhood, gorgon-complexity G2 + G4 reports), and gorgon-learning (G5 Gauss hotspot-drift posterior on PreCompact); publishing four gorgon.* events on the enchanted-mcp bus with optional peer-plugin enrichment from Crow and Sylph"
+         width="100%" style="max-width: 1100px;">
+  </a>
+</p>
+
+<sub align="center">
+
+Source: [docs/assets/pipeline.mmd](docs/assets/pipeline.mmd) · Regeneration command in [docs/assets/README.md](docs/assets/README.md).
+
+</sub>
+
 parses each via stdlib `ast`, builds the file-level import adjacency, runs
 **G1 Tarjan SCC** (cycle detection, O(V+E) iterative) and **G3 PageRank**
 power-iteration (centrality, damping 0.85). The result is persisted
@@ -102,6 +117,21 @@ Every advisory carries `(score, ci_low, ci_high, N)` from a non-parametric boots
 ## The Full Lifecycle
 
 Gorgon is **hook-driven for capture** and **skill-invoked for query**. No phase blocks tool completion.
+
+<p align="center">
+  <a href="docs/assets/lifecycle.mmd" title="View lifecycle source (Mermaid)">
+    <img src="docs/assets/lifecycle.svg"
+         alt="Gorgon hook lifecycle blueprint — five phases: 1 GAZE (SessionStart full *.py walk + G1 Tarjan SCC + G3 PageRank into atomic snapshot.json), 2 WATCH (PostToolUse Write|Edit re-parse touched file + 1-hop importers + G2 cyclomatic recount), 3 QUERY (UserPromptSubmit or skill invocation: /gorgon:hotspots G3 ranking, /gorgon:deps G1 BFS, /gorgon:complexity G2 + G4 report), 4 LEARN (PreCompact G5 Gauss posterior update with top-N stability across snapshots), 5 NEXT-SESSION (tighter expected hotspot envelope per-(repo × hotspot-kind))"
+         width="100%" style="max-width: 1100px;">
+  </a>
+</p>
+
+<sub align="center">
+
+Source: [docs/assets/lifecycle.mmd](docs/assets/lifecycle.mmd) · Regeneration command in [docs/assets/README.md](docs/assets/README.md).
+
+</sub>
+
 
 | Phase | Event or Skill | Sub-plugin | Engines | Output |
 |-------|----------------|------------|---------|--------|

@@ -23,11 +23,7 @@ Gazes at the repository, freezes its current structure into an immutable snapsho
 
 ## Origin
 
-Gorgon takes its name from **Minecraft mod: Ice and Fire** (Alex Modder &
-Raptorfarian, 2018) — the Gorgon, a serpent-haired entity whose petrifying
-gaze freezes those it sees into immutable stone. That is literally the
-function of this plugin: gaze at the repository, freeze its current
-structure into an immutable snapshot, and report back what the structure is.
+**Gorgon** takes its name from **Ice and Fire** — the Gorgon, a serpent-haired entity whose petrifying gaze freezes those it sees into immutable stone. That is literally the function of this plugin: gaze at the repository, freeze its current structure into an immutable snapshot, and report back what the structure is.
 
 The question this plugin answers: *What does this codebase actually look like right now?*
 

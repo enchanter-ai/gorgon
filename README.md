@@ -6,7 +6,7 @@
   <img alt="5 engines" src="https://img.shields.io/badge/Engines-G1%E2%80%93G5-58a6ff?style=for-the-badge">
   <img alt="3 agents" src="https://img.shields.io/badge/Agents-3-d29922?style=for-the-badge">
   <img alt="Phase 1" src="https://img.shields.io/badge/Phase-1-f0883e?style=for-the-badge">
-  <a href="https://www.repostatus.org/#wip"><img alt="Project Status: WIP" src="https://www.repostatus.org/badges/latest/wip.svg"></a>
+  <a href="https://www.repostatus.org/#active"><img alt="Project Status: Active" src="https://www.repostatus.org/badges/latest/active.svg"></a>
 </p>
 
 > **An @enchanted-plugins product — algorithm-driven, agent-managed, self-learning.**

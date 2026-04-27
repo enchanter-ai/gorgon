@@ -1,0 +1,17 @@
+{
+  "description": "gorgon-watcher hooks — advisory-only, fail-open. Re-parse touched file + 1-hop importers after Write|Edit.",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/post-tool-use/refresh-touched.sh\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

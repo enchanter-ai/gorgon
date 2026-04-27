@@ -171,6 +171,10 @@ Events published on the `gorgon.*` namespace (Phase-1 file-tail fallback via sha
 
 Optional subscriptions (Phase-2 enrichment): `crow.change.classified`, `sylph.workflow.classified`.
 
+## Roadmap
+
+Tracked in [docs/ROADMAP.md](docs/ROADMAP.md) and the shared [ecosystem map](https://github.com/enchanted-plugins/wixie/blob/main/docs/ecosystem.md). For upcoming work specific to Gorgon, see issues tagged [roadmap](https://github.com/enchanted-plugins/gorgon/labels/roadmap).
+
 ## The Science Behind Gorgon
 
 | ID | Name                                  | Reference                                                                              |

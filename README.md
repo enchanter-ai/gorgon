@@ -229,6 +229,18 @@ applied across all plugins.
 
 `docs/architecture/` — Phase 2 will host auto-generated mermaid diagrams.
 
+## Acknowledgments
+
+- **Tarjan R.E.** — the 1972 strongly-connected-components algorithm underpinning G1.
+- **McCabe T.J.** — the 1976 cyclomatic complexity measure underpinning G2.
+- **Brin S. and Page L.** — the 1998 PageRank paper underpinning G3.
+- **Halstead M.H.** — the 1977 software-science volume metrics underpinning G4.
+- **Gauss C.F.** — the 1809 least-squares foundation underpinning G5.
+- **Liu et al.** — "Lost in the Middle" (NAACL 2024) — documented the recall valley that justifies the out-of-context snapshot design.
+- **Sourcegraph** — the 2022 "What is a code hotspot" retrospective that documented the limits of single-axis hotspot ranking.
+- **Alex Modder and Raptorfarian** — Ice and Fire (2018) — the Minecraft mod whose Gorgon entity gave this plugin its name and metaphor.
+- **@enchanted-plugins** siblings — Wixie, Emu, Crow, Hydra, Lich, Sylph, Pech, Djinn, Naga — for the canonical template, the event-bus pattern, and the ecosystem contract.
+
 ## License
 
 MIT — see [LICENSE](LICENSE).

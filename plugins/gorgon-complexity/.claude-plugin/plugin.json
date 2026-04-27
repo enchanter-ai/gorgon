@@ -1,0 +1,21 @@
+{
+  "name": "gorgon-complexity",
+  "description": "Per-function McCabe (G2) plus per-module Halstead (G4) report. Returns top complexity offenders with absolute scores and percentile rank in the repo distribution. Use when the user runs /gorgon:complexity or asks about complex functions.",
+  "version": "0.1.0",
+  "author": {
+    "name": "enchanted-plugins"
+  },
+  "license": "MIT",
+  "keywords": [
+    "complexity",
+    "mccabe",
+    "halstead",
+    "cyclomatic"
+  ],
+  "skills": [
+    "./skills/complexity-report/"
+  ],
+  "commands": [
+    "./commands/complexity.md"
+  ]
+}

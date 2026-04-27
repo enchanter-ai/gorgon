@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "Gorgon"
+authors:
+  - name: "enchanted-plugins"
+abstract: >
+  Gazes at the repository, freezes its current structure into an immutable
+  snapshot, and surfaces hotspots, cycles, and complexity by structural rank.
+  Passive codebase intelligence orthogonal to per-change trust, workflow
+  weaving, and intent anchoring.
+version: 0.1.0
+date-released: 2026-04-25
+license: MIT
+repository-code: "https://github.com/enchanted-plugins/gorgon"
+keywords:
+  - claude-code
+  - static-analysis
+  - import-graph
+  - pagerank
+  - tarjan
+  - mccabe
+  - halstead

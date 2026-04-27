@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.DS_Store
+state/events.jsonl
+state/snapshot.json
+state/learnings.jsonl
+state/parse-failures.jsonl
+plugins/*/state/*.json
+plugins/*/state/*.jsonl
+!plugins/*/state/.gitkeep

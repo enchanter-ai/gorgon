@@ -23,3 +23,13 @@ flowchart LR
     Snap --> Compact["PreCompact"]
     Compact --> Learn["gorgon-learning<br/>G5 posterior update"]
     Learn --> Done(["next session<br/>tighter envelope"])
+
+
+    classDef start fill:#0a1628,stroke:#58a6ff,stroke-width:2px,color:#e6edf3,rx:10,ry:10
+    classDef done fill:#0a1628,stroke:#3fb950,stroke-width:2px,color:#e6edf3,rx:10,ry:10
+    classDef state fill:#0a1628,stroke:#d29922,stroke-width:1.5px,color:#e6edf3,rx:8,ry:8
+
+    linkStyle default stroke:#8b949e,stroke-width:1.5px
+    class Start start
+    class Done done
+    class Snap state

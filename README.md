@@ -255,6 +255,20 @@ Pull requests welcome. Key rules:
 - Honest-numbers contract on every advisory: no N, no advisory.
 - Stdlib only — no `pip install`, no tree-sitter, no networkx. Run `python -m unittest discover tests/` before opening the PR.
 
+## Citation
+
+See [CITATION.cff](CITATION.cff) for machine-readable citation metadata.
+
+```
+@software{gorgon_2026,
+  title   = {Gorgon: Static codebase intelligence for long-horizon Claude Code sessions},
+  author  = {{enchanted-plugins}},
+  year    = {2026},
+  url     = {https://github.com/enchanted-plugins/gorgon},
+  license = {MIT}
+}
+```
+
 ## License
 
 MIT — see [LICENSE](LICENSE).

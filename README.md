@@ -19,6 +19,12 @@ Gazes at the repository, freezes its current structure into an immutable snapsho
 >
 > Time: deterministic, zero per-turn LLM calls on the critical path. Developer effort: read one ranked list.
 
+## TL;DR
+
+**In plain English:** Linters tell you a file is complex, but they miss the twenty-line file that half the codebase imports — the one that will take down your whole app when it breaks.
+
+**Technically:** G1 Tarjan SCC detects import cycles via iterative O(V+E) traversal over stdlib-`ast` edges stored in `state/snapshot.json`; G3 PageRank power-iteration (damping 0.85) ranks files by import centrality, exposing high-fan-in god-modules invisible to cyclomatic-only tools; G2 McCabe cyclomatic complexity labels each changed function per `PostToolUse`. Every hotspot advisory carries `(score, ci_low, ci_high, N)` from a non-parametric bootstrap — rows without N are rejected and never emitted.
+
 ---
 
 ## Origin

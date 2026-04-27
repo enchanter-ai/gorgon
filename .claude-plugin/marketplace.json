@@ -1,0 +1,54 @@
+{
+  "name": "gorgon",
+  "owner": {
+    "name": "enchanted-plugins"
+  },
+  "metadata": {
+    "description": "Gazes at the repository, freezes its current structure into an immutable snapshot, and surfaces hotspots, cycles, and complexity by structural rank.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "full",
+      "source": "./plugins/full",
+      "description": "Meta-plugin. One install pulls in all six Gorgon sub-plugins via dependency resolution.",
+      "category": "meta"
+    },
+    {
+      "name": "gorgon-gaze",
+      "source": "./plugins/gorgon-gaze",
+      "description": "Captures the initial codebase snapshot on SessionStart; refreshes on UserPromptSubmit focus shifts. Runs G1 Tarjan SCC + G3 PageRank.",
+      "category": "validator"
+    },
+    {
+      "name": "gorgon-watcher",
+      "source": "./plugins/gorgon-watcher",
+      "description": "Per-edit incremental AST refresh; updates G1 adjacency and recomputes G2 cyclomatic on changed functions.",
+      "category": "validator"
+    },
+    {
+      "name": "gorgon-hotspots",
+      "source": "./plugins/gorgon-hotspots",
+      "description": "Top-N hotspot ranking with bootstrap 95% CI. Reads state/snapshot.json.",
+      "category": "executor"
+    },
+    {
+      "name": "gorgon-deps",
+      "source": "./plugins/gorgon-deps",
+      "description": "1-hop / 2-hop dependency neighbourhood query for a file (imports and importers).",
+      "category": "executor"
+    },
+    {
+      "name": "gorgon-complexity",
+      "source": "./plugins/gorgon-complexity",
+      "description": "Per-function McCabe + per-module Halstead report.",
+      "category": "executor"
+    },
+    {
+      "name": "gorgon-learning",
+      "source": "./plugins/gorgon-learning",
+      "description": "PreCompact hook persists hotspot-drift signature posterior via G5 Gauss Accumulation.",
+      "category": "validator"
+    }
+  ]
+}

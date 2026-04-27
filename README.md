@@ -27,44 +27,6 @@ Gazes at the repository, freezes its current structure into an immutable snapsho
 
 The question this plugin answers: *What does this codebase actually look like right now?*
 
-## How It Works
-
-On `SessionStart`, **gorgon-gaze** walks `*.py` files in the project root,
-parses each via stdlib `ast`, builds the file-level import adjacency, runs
-**G1 Tarjan SCC** (cycle detection, O(V+E) iterative) and **G3 PageRank**
-power-iteration (centrality, damping 0.85). The result is persisted
-atomically to `plugins/gorgon-gaze/state/snapshot.json`.
-
-On `PostToolUse(Write|Edit)`, **gorgon-watcher** re-parses the touched file
-plus its 1-hop importers, updates the adjacency, and recomputes **G2 McCabe
-cyclomatic** on the changed functions. Dirty nodes accumulate for the next
-gaze.
-
-On `PreCompact`, **gorgon-learning** folds the snapshot's drift signature
-into the per-(repo × hotspot-kind) posterior via **G5 Gauss Accumulation**.
-
-On demand: `/gorgon:hotspots`, `/gorgon:deps <file>`, `/gorgon:complexity` —
-each reads the snapshot and returns ranked, CI-banded answers.
-
-## Install
-
-```
-/plugin marketplace add enchanted-plugins/gorgon
-/plugin install full@gorgon
-```
-
-Or cherry-pick: `/plugin install gorgon-hotspots@gorgon`.
-
-## Quickstart
-
-```
-/plugin install full@gorgon
-/gorgon:hotspots 7
-```
-
-Expected: a table of the top-7 PageRank-ranked Python files with
-`(score, ci_low, ci_high, N, hotspot_kind)`.
-
 ## Who this is for
 
 - Architects auditing god-modules — files that look small but have import fan-in from half the codebase, invisible to cyclomatic-only tools.
@@ -89,6 +51,25 @@ Not for:
 - [Agent Conduct (13 Modules)](#agent-conduct-13-modules)
 - [Architecture](#architecture)
 - [License](#license)
+
+## How It Works
+
+On `SessionStart`, **gorgon-gaze** walks `*.py` files in the project root,
+parses each via stdlib `ast`, builds the file-level import adjacency, runs
+**G1 Tarjan SCC** (cycle detection, O(V+E) iterative) and **G3 PageRank**
+power-iteration (centrality, damping 0.85). The result is persisted
+atomically to `plugins/gorgon-gaze/state/snapshot.json`.
+
+On `PostToolUse(Write|Edit)`, **gorgon-watcher** re-parses the touched file
+plus its 1-hop importers, updates the adjacency, and recomputes **G2 McCabe
+cyclomatic** on the changed functions. Dirty nodes accumulate for the next
+gaze.
+
+On `PreCompact`, **gorgon-learning** folds the snapshot's drift signature
+into the per-(repo × hotspot-kind) posterior via **G5 Gauss Accumulation**.
+
+On demand: `/gorgon:hotspots`, `/gorgon:deps <file>`, `/gorgon:complexity` —
+each reads the snapshot and returns ranked, CI-banded answers.
 
 ## What Makes Gorgon Different
 
@@ -127,6 +108,25 @@ Gorgon is **hook-driven for capture** and **skill-invoked for query**. No phase 
 | Query — complexity | `/gorgon:complexity` | `gorgon-complexity` | G2 + G4 | per-function McCabe + per-module Halstead |
 
 Every capture phase is hook-driven and fail-open. Every query phase is skill-invoked on demand.
+
+## Install
+
+```
+/plugin marketplace add enchanted-plugins/gorgon
+/plugin install full@gorgon
+```
+
+Or cherry-pick: `/plugin install gorgon-hotspots@gorgon`.
+
+## Quickstart
+
+```
+/plugin install full@gorgon
+/gorgon:hotspots 7
+```
+
+Expected: a table of the top-7 PageRank-ranked Python files with
+`(score, ci_low, ci_high, N, hotspot_kind)`.
 
 ## 7 Plugins, 3 Agents
 

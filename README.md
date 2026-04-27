@@ -245,6 +245,16 @@ applied across all plugins.
 
 Gorgon follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html). Breaking changes to engine signatures, event payloads, or the honest-numbers tuple shape bump the major version. Additive engines or sub-plugins bump the minor. Bug fixes bump the patch. See [CHANGELOG.md](CHANGELOG.md) for the running history.
 
+## Contributing
+
+Pull requests welcome. Key rules:
+
+- Do not edit `shared/conduct/*.md` in a Gorgon PR; raise the change in the [schematic](https://github.com/enchanted-plugins/schematic) repo so it propagates to every sibling.
+- Every new engine needs an Author-Year docstring citation and a `docs/science/README.md` section.
+- Every hook script opens with the subagent-loop guard and exits 0 fail-open.
+- Honest-numbers contract on every advisory: no N, no advisory.
+- Stdlib only — no `pip install`, no tree-sitter, no networkx. Run `python -m unittest discover tests/` before opening the PR.
+
 ## License
 
 MIT — see [LICENSE](LICENSE).

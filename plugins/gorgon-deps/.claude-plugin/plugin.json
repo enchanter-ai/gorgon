@@ -1,0 +1,20 @@
+{
+  "name": "gorgon-deps",
+  "description": "1-hop and 2-hop dependency neighbourhood query for a given file in both directions (imports and importers). Reads state/snapshot.json. Use when the user runs /gorgon:deps <file> or asks what depends on a file.",
+  "version": "0.1.0",
+  "author": {
+    "name": "enchanted-plugins"
+  },
+  "license": "MIT",
+  "keywords": [
+    "dependencies",
+    "neighbourhood",
+    "import-graph"
+  ],
+  "skills": [
+    "./skills/deps-query/"
+  ],
+  "commands": [
+    "./commands/deps.md"
+  ]
+}

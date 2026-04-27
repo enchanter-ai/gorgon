@@ -140,6 +140,37 @@ Expected: a table of the top-7 PageRank-ranked Python files with
 | gorgon-learning     | PreCompact                    | G5          | (none — pure compute)        |
 | full                | meta                          | —           | —                            |
 
+## What You Get Per Session
+
+Every `SessionStart` rebuilds the import-graph snapshot; every `PostToolUse(Write|Edit)` refreshes the affected node + 1-hop importers; every `PreCompact` folds a drift summary into the cross-session posterior. All writes go through the atomic `shared/scripts/state_io.atomic_write_json` helper.
+
+```
+plugins/gorgon-gaze/state/
+└── snapshot.json              full repo import-adjacency + G1 SCCs + G3 PageRank scores
+
+plugins/gorgon-watcher/state/
+└── dirty-nodes.jsonl          append-only log of files whose adjacency was refreshed mid-session
+
+plugins/gorgon-learning/state/
+├── posteriors.json            per-(repo × hotspot-kind) hotspot-drift posterior (G5 EMA)
+└── learnings.jsonl            per-snapshot append-only drift summary (backtesting source)
+
+plugins/gorgon-hotspots/state/
+└── last-report.json           most recent /gorgon:hotspots output
+
+plugins/gorgon-complexity/state/
+└── last-report.json           most recent /gorgon:complexity output
+```
+
+Events published on the `gorgon.*` namespace (Phase-1 file-tail fallback via shared `publish.py`):
+
+- `gorgon.snapshot.captured` — `{session_id, repo_root, file_count, edge_count, captured_at}`
+- `gorgon.hotspot.detected` — `{file, score, ci_low, ci_high, N, rank, hotspot_kind}`
+- `gorgon.cycle.detected` — `{scc_members, edges, severity}`
+- `gorgon.snapshot.refreshed` — `{session_id, dirty_nodes, turn}`
+
+Optional subscriptions (Phase-2 enrichment): `crow.change.classified`, `sylph.workflow.classified`.
+
 ## The Science Behind Gorgon
 
 | ID | Name                                  | Reference                                                                              |

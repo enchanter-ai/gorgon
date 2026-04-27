@@ -1,0 +1,50 @@
+---
+title: Gorgon six-subplugin architecture
+config:
+  look: neo
+  theme: dark
+  flowchart:
+    curve: basis
+    padding: 18
+    nodeSpacing: 44
+    rankSpacing: 54
+    htmlLabels: true
+---
+flowchart TB
+    Session(["INPUT · CLAUDE CODE SESSION<br/><small>SessionStart + UserPromptSubmit + PostToolUse + PreCompact</small>"])
+
+    subgraph Gaze["SUB-PLUGIN 01 · GORGON-GAZE · G1 + G3"]
+        direction LR
+        walk["WALK<br/>*.py files<br/><small>stdlib ast.parse</small>"] --> adj["BUILD<br/>import adjacency<br/><small>dict[str, list[str]]</small>"] --> snap["SNAPSHOT<br/>state/snapshot.json<br/><small>atomic · out-of-context</small>"]
+    end
+
+    subgraph Watcher["SUB-PLUGIN 02 · GORGON-WATCHER · G1 + G2"]
+        direction LR
+        touched["RE-PARSE<br/>touched file<br/><small>+ 1-hop importers</small>"] --> recount["RECOUNT<br/>cyclomatic<br/><small>per changed function</small>"] --> dirty["MARK DIRTY<br/>nodes<br/><small>incremental</small>"]
+    end
+
+    subgraph Skills["SUB-PLUGINS 03 · 04 · 05 · GORGON-HOTSPOTS · GORGON-DEPS · GORGON-COMPLEXITY"]
+        direction LR
+        hot["G3 PAGERANK<br/>top-N hotspots<br/><small>bootstrap CI · N</small>"] --> deps["G1 BFS<br/>1-hop · 2-hop<br/><small>imports + importers</small>"] --> cx["G2 + G4<br/>complexity report<br/><small>McCabe + Halstead</small>"]
+    end
+
+    subgraph Learning["SUB-PLUGIN 06 · GORGON-LEARNING · G5"]
+        direction LR
+        drift["DRIFT<br/>vs prior snapshot<br/><small>top-N stability</small>"] --> post["G5 GAUSS<br/>POSTERIOR<br/><small>(repo × hotspot-kind)</small>"]
+    end
+
+    subgraph Bus["OUTPUT · ENCHANTED-MCP BUS · gorgon.* EVENTS · HONEST-NUMBERS ENFORCED"]
+        direction LR
+        evt1["gorgon.snapshot.<br/>captured"] --> evt2["gorgon.hotspot.<br/>detected<br/><small>(score, ci, N)</small>"] --> evt3["gorgon.cycle.<br/>detected"] --> evt4["gorgon.snapshot.<br/>refreshed"]
+    end
+
+    Peers["PEER PLUGINS ENRICH (OPTIONAL)<br/><small>Crow → change.classified · Sylph → workflow.classified</small>"]
+
+    Session --> Gaze
+    Session --> Watcher
+    Gaze --> Skills
+    Watcher --> Skills
+    Skills --> Bus
+    Watcher --> Learning
+    Learning --> Bus
+    Peers -.-> Skills

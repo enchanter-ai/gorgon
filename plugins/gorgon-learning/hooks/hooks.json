@@ -1,0 +1,17 @@
+{
+  "description": "gorgon-learning hooks — advisory-only, fail-open. Update G5 hotspot-drift posterior on PreCompact.",
+  "hooks": {
+    "PreCompact": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/pre-compact/update-posterior.sh\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

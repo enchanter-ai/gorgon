@@ -1,0 +1,14 @@
+{
+  "name": "gorgon-learning",
+  "description": "Persists the hotspot-drift signature posterior on PreCompact via G5 Gauss Accumulation. Records how the top-N hotspot set has shifted since the last compaction.",
+  "version": "0.1.0",
+  "author": {
+    "name": "enchanted-plugins"
+  },
+  "license": "MIT",
+  "keywords": [
+    "gauss-accumulation",
+    "drift-signature",
+    "learning"
+  ]
+}

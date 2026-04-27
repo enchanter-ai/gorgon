@@ -1,0 +1,25 @@
+---
+title: Gorgon hook lifecycle
+config:
+  look: neo
+  theme: dark
+  flowchart:
+    curve: basis
+    padding: 18
+    nodeSpacing: 44
+    rankSpacing: 54
+---
+flowchart LR
+    Start(["SessionStart"]) --> Gaze["gorgon-gaze<br/>full snapshot<br/><small>G1 + G3</small>"]
+    Gaze --> Snap["snapshot.json<br/><small>atomic write</small>"]
+    Snap --> Idle1["session active"]
+    Idle1 --> Edit["PostToolUse<br/>(Write|Edit)"]
+    Edit --> Watcher["gorgon-watcher<br/>incremental refresh<br/><small>G1 + G2</small>"]
+    Watcher --> Snap
+    Snap --> Skill["UserPromptSubmit<br/>or skill invoke"]
+    Skill --> Hot["/gorgon:hotspots<br/>G3 ranking"]
+    Skill --> Deps["/gorgon:deps<br/>G1 BFS"]
+    Skill --> Cx["/gorgon:complexity<br/>G2 + G4"]
+    Snap --> Compact["PreCompact"]
+    Compact --> Learn["gorgon-learning<br/>G5 posterior update"]
+    Learn --> Done(["next session<br/>tighter envelope"])

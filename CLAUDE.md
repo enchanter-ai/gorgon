@@ -15,6 +15,7 @@ These apply to every skill in every plugin. Load once; do not re-derive.
 - @shared/conduct/verification.md — independent checks, baseline snapshots, dry-run for destructive ops
 - @shared/conduct/delegation.md — subagent contracts, tool whitelisting, parallel vs. serial rules
 - @shared/conduct/failure-modes.md — 14-code taxonomy for accumulated-learning logs
+- @shared/conduct/doubt-engine.md — adversarial self-check before agreement; active counter to F01 sycophancy
 - @shared/conduct/tool-use.md — tool-choice hygiene, error payload contract, parallel-dispatch rules
 - @shared/conduct/formatting.md — per-target format (XML/Markdown/minimal/few-shot), prefill + stop sequences
 - @shared/conduct/skill-authoring.md — SKILL.md frontmatter discipline, discovery test

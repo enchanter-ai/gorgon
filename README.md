@@ -13,7 +13,7 @@
   <a href="https://www.repostatus.org/#active"><img alt="Project Status: Active" src="https://www.repostatus.org/badges/latest/active.svg"></a>
 </p>
 
-> **An @enchanted-plugins product — algorithm-driven, agent-managed, self-learning.**
+> **An @enchanter-ai product — algorithm-driven, agent-managed, self-learning.**
 
 Gazes at the repository, freezes its current structure into an immutable snapshot, and surfaces hotspots, cycles, and complexity by structural rank. Passive codebase intelligence — orthogonal to per-change trust (Crow), workflow weaving (Sylph), and intent anchoring (Djinn).
 
@@ -152,7 +152,7 @@ Every capture phase is hook-driven and fail-open. Every query phase is skill-inv
 ## Install
 
 ```
-/plugin marketplace add enchanted-plugins/gorgon
+/plugin marketplace add enchanter-ai/gorgon
 /plugin install full@gorgon
 ```
 
@@ -213,7 +213,7 @@ Optional subscriptions (Phase-2 enrichment): `crow.change.classified`, `sylph.wo
 
 ## Roadmap
 
-Tracked in [docs/ROADMAP.md](docs/ROADMAP.md) and the shared [ecosystem map](https://github.com/enchanted-plugins/wixie/blob/main/docs/ecosystem.md). For upcoming work specific to Gorgon, see issues tagged [roadmap](https://github.com/enchanted-plugins/gorgon/labels/roadmap).
+Tracked in [docs/ROADMAP.md](docs/ROADMAP.md) and the shared [ecosystem map](https://github.com/enchanter-ai/wixie/blob/main/docs/ecosystem.md). For upcoming work specific to Gorgon, see issues tagged [roadmap](https://github.com/enchanter-ai/gorgon/labels/roadmap).
 
 ## The Science Behind Gorgon
 
@@ -279,7 +279,7 @@ applied across all plugins.
 - **Liu et al.** — "Lost in the Middle" (NAACL 2024) — documented the recall valley that justifies the out-of-context snapshot design.
 - **Sourcegraph** — the 2022 "What is a code hotspot" retrospective that documented the limits of single-axis hotspot ranking.
 - **Alex Modder and Raptorfarian** — Ice and Fire (2018) — the Minecraft mod whose Gorgon entity gave this plugin its name and metaphor.
-- **@enchanted-plugins** siblings — Wixie, Emu, Crow, Hydra, Lich, Sylph, Pech, Djinn, Naga — for the canonical template, the event-bus pattern, and the ecosystem contract.
+- **@enchanter-ai** siblings — Wixie, Emu, Crow, Hydra, Lich, Sylph, Pech, Djinn, Naga — for the canonical template, the event-bus pattern, and the ecosystem contract.
 
 ## Versioning & release cadence
 
@@ -289,7 +289,7 @@ Gorgon follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html). Break
 
 Pull requests welcome. Key rules:
 
-- Do not edit `shared/conduct/*.md` in a Gorgon PR; raise the change in the [schematic](https://github.com/enchanted-plugins/schematic) repo so it propagates to every sibling.
+- Do not edit `shared/conduct/*.md` in a Gorgon PR; raise the change in the [schematic](https://github.com/enchanter-ai/schematic) repo so it propagates to every sibling.
 - Every new engine needs an Author-Year docstring citation and a `docs/science/README.md` section.
 - Every hook script opens with the subagent-loop guard and exits 0 fail-open.
 - Honest-numbers contract on every advisory: no N, no advisory.
@@ -302,9 +302,9 @@ See [CITATION.cff](CITATION.cff) for machine-readable citation metadata.
 ```
 @software{gorgon_2026,
   title   = {Gorgon: Static codebase intelligence for long-horizon Claude Code sessions},
-  author  = {{enchanted-plugins}},
+  author  = {{enchanter-ai}},
   year    = {2026},
-  url     = {https://github.com/enchanted-plugins/gorgon},
+  url     = {https://github.com/enchanter-ai/gorgon},
   license = {MIT}
 }
 ```

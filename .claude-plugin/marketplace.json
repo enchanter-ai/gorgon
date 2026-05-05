@@ -1,7 +1,7 @@
 {
   "name": "gorgon",
   "owner": {
-    "name": "enchanted-plugins"
+    "name": "enchanter-ai"
   },
   "metadata": {
     "description": "Gazes at the repository, freezes its current structure into an immutable snapshot, and surfaces hotspots, cycles, and complexity by structural rank.",

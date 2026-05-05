@@ -53,20 +53,19 @@ def _events_path() -> Path:
 
 
 def publish(topic: str, payload: dict) -> None:
-    """Write a single JSONL event line atomically (append + fsync). Fail-open."""
+    """Write a single JSONL event line, locked + fsynced. Fail-open."""
     try:
         entry = {
             "topic": topic,
             "payload": payload,
             "emitted_at": datetime.now(timezone.utc).isoformat(),
         }
-        line = json.dumps(entry, separators=(",", ":")) + "\n"
-        path = _events_path()
-        path.parent.mkdir(parents=True, exist_ok=True)
-        with open(path, "a", encoding="utf-8") as fh:
-            fh.write(line)
-            fh.flush()
-            os.fsync(fh.fileno())
+        line = json.dumps(entry, separators=(",", ":"))
+        # Locked append helper — see state_io.append_jsonl_locked.
+        # Local import keeps this module decoupled from package layout.
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        from state_io import append_jsonl_locked  # noqa: E402
+        append_jsonl_locked(_events_path(), line)
     except Exception as exc:
         print(f"[pech:publish] failed to emit {topic!r}: {exc}", file=sys.stderr)
 

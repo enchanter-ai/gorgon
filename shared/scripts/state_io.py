@@ -5,12 +5,17 @@ Every JSON state file in Gorgon goes through `atomic_write_json`. No direct
 open('w') on state paths, ever. See `shared/conduct/verification.md` and
 Djinn's state_io.py for the invariant this enforces.
 
+JSONL appends go through `append_jsonl`, which is locked + flushed via
+`append_jsonl_locked` so concurrent writers (e.g., gorgon-watcher
+PostToolUse + gorgon-learning pre-compact) cannot interleave bytes.
+
 Stdlib only.
 """
 from __future__ import annotations
 
 import json
 import os
+import sys
 import tempfile
 from pathlib import Path
 from typing import Any
@@ -56,14 +61,46 @@ def read_json(path: Path | str, default: Any = None) -> Any:
         return default
 
 
-def append_jsonl(path: Path | str, record: dict) -> None:
-    """JSONL append with fsync. Fail-open: never raises to the caller."""
+def append_jsonl_locked(path: Path | str, line: str) -> None:
+    """Append one JSON line, locked + flushed. Cross-platform.
+
+    Holds an exclusive lock for the duration of the write so concurrent
+    writers cannot interleave bytes. Honest-numbers contract for posterior
+    updates depends on this — see audit F-016 / `shared/conduct/inference-substrate.md`.
+    """
     p = Path(path)
     p.parent.mkdir(parents=True, exist_ok=True)
+    if not line.endswith("\n"):
+        line += "\n"
+    with p.open("a", encoding="utf-8") as f:
+        if sys.platform == "win32":
+            import msvcrt
+            try:
+                msvcrt.locking(f.fileno(), msvcrt.LK_LOCK, 1)
+                f.write(line)
+                f.flush()
+                os.fsync(f.fileno())
+            finally:
+                try:
+                    f.seek(0)
+                    msvcrt.locking(f.fileno(), msvcrt.LK_UNLCK, 1)
+                except OSError:
+                    pass
+        else:
+            import fcntl
+            try:
+                fcntl.flock(f.fileno(), fcntl.LOCK_EX)
+                f.write(line)
+                f.flush()
+                os.fsync(f.fileno())
+            finally:
+                fcntl.flock(f.fileno(), fcntl.LOCK_UN)
+
+
+def append_jsonl(path: Path | str, record: dict) -> None:
+    """JSONL append, locked + fsynced. Fail-open: never raises to the caller."""
     try:
-        with open(p, "a", encoding="utf-8") as fh:
-            fh.write(json.dumps(record, separators=(",", ":")) + "\n")
-            fh.flush()
-            os.fsync(fh.fileno())
+        line = json.dumps(record, separators=(",", ":"))
+        append_jsonl_locked(Path(path), line)
     except OSError:
         pass

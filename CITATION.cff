@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
 title: "Gorgon"
 authors:
-  - name: "enchanted-plugins"
+  - name: "enchanter-ai"
 abstract: >
   Gazes at the repository, freezes its current structure into an immutable
   snapshot, and surfaces hotspots, cycles, and complexity by structural rank.
@@ -11,7 +11,7 @@ abstract: >
 version: 0.1.0
 date-released: 2026-04-25
 license: MIT
-repository-code: "https://github.com/enchanted-plugins/gorgon"
+repository-code: "https://github.com/enchanter-ai/gorgon"
 keywords:
   - claude-code
   - static-analysis

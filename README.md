@@ -251,18 +251,18 @@ applied across all plugins.
 
 | Module                         | What it governs                                                            |
 |--------------------------------|----------------------------------------------------------------------------|
-| [discipline.md](shared/conduct/discipline.md) | think-first, simplicity, surgical edits, goal-driven loops |
-| [context.md](shared/conduct/context.md)       | attention-budget hygiene, U-curve, checkpoint protocol     |
-| [verification.md](shared/conduct/verification.md) | baseline snapshots, dry-run, post-change diff read-back |
-| [delegation.md](shared/conduct/delegation.md)     | subagent contracts, tool whitelisting, parallel rules    |
-| [failure-modes.md](shared/conduct/failure-modes.md) | F01-F14 taxonomy                                       |
-| [tool-use.md](shared/conduct/tool-use.md)         | right-tool-first-try, parallel vs. serial               |
-| [formatting.md](shared/conduct/formatting.md)     | XML/Markdown/minimal/few-shot, prefill + stop seq.      |
-| [skill-authoring.md](shared/conduct/skill-authoring.md) | SKILL.md frontmatter discipline                    |
-| [hooks.md](shared/conduct/hooks.md)               | advisory-only, injection over denial, fail-open         |
-| [precedent.md](shared/conduct/precedent.md)       | log self-observed failures, consult before risky steps  |
-| [tier-sizing.md](shared/conduct/tier-sizing.md)   | Opus intent-level, Sonnet decomposed, Haiku step-by-step|
-| [web-fetch.md](shared/conduct/web-fetch.md)       | WebFetch is Haiku-tier-only; cache and budget           |
+| [discipline.md](shared/foundations/conduct/discipline.md) | think-first, simplicity, surgical edits, goal-driven loops |
+| [context.md](shared/foundations/conduct/context.md)       | attention-budget hygiene, U-curve, checkpoint protocol     |
+| [verification.md](shared/foundations/conduct/verification.md) | baseline snapshots, dry-run, post-change diff read-back |
+| [delegation.md](shared/foundations/conduct/delegation.md)     | subagent contracts, tool whitelisting, parallel rules    |
+| [failure-modes.md](shared/foundations/conduct/failure-modes.md) | F01-F14 taxonomy                                       |
+| [tool-use.md](shared/foundations/conduct/tool-use.md)         | right-tool-first-try, parallel vs. serial               |
+| [formatting.md](shared/foundations/conduct/formatting.md)     | XML/Markdown/minimal/few-shot, prefill + stop seq.      |
+| [skill-authoring.md](shared/foundations/conduct/skill-authoring.md) | SKILL.md frontmatter discipline                    |
+| [hooks.md](shared/foundations/conduct/hooks.md)               | advisory-only, injection over denial, fail-open         |
+| [precedent.md](shared/foundations/conduct/precedent.md)       | log self-observed failures, consult before risky steps  |
+| [tier-sizing.md](shared/foundations/conduct/tier-sizing.md)   | Opus intent-level, Sonnet decomposed, Haiku step-by-step|
+| [web-fetch.md](shared/foundations/conduct/web-fetch.md)       | WebFetch is Haiku-tier-only; cache and budget           |
 | [inference-substrate.md](shared/conduct/inference-substrate.md) | inference-engine emit-only contract        |
 
 ## Architecture

@@ -160,14 +160,13 @@ Or cherry-pick: `/plugin install gorgon-hotspots@gorgon`.
 
 ## Quickstart
 
-```
-/plugin install full@gorgon
-/gorgon:hotspots 7
+```bash
+git clone https://github.com/enchanter-ai/gorgon
+cd gorgon
+./scripts/bootstrap.sh    # canonical first command — installs enchanter-foundations sibling
 ```
 
-Expected: a table of the top-7 PageRank-ranked Python files with
-`(score, ci_low, ci_high, N, hotspot_kind)`.
-
+Without `./scripts/bootstrap.sh`, conduct imports will silently miss and Claude Code's `@`-loader will fail-soft. Always bootstrap first.
 ## 7 Plugins, 3 Agents
 
 | Plugin              | Trigger                       | Engines     | Agent (tier)                |

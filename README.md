@@ -163,7 +163,7 @@ Or cherry-pick: `/plugin install gorgon-hotspots@gorgon`.
 ```bash
 git clone https://github.com/enchanter-ai/gorgon
 cd gorgon
-./scripts/bootstrap.sh    # canonical first command — installs foundations sibling
+./scripts/bootstrap.sh    # canonical first command — installs vis sibling
 ```
 
 Without `./scripts/bootstrap.sh`, conduct imports will silently miss and Claude Code's `@`-loader will fail-soft. Always bootstrap first.
@@ -245,24 +245,24 @@ collapse into a single number.
 ## Agent Conduct (13 Modules)
 
 Every skill inherits a reusable behavioral contract from
-[shared/foundations/conduct/](shared/foundations/conduct/) — loaded once into [CLAUDE.md](CLAUDE.md),
+[shared/vis/conduct/](shared/vis/conduct/) — loaded once into [CLAUDE.md](CLAUDE.md),
 applied across all plugins.
 
 | Module                         | What it governs                                                            |
 |--------------------------------|----------------------------------------------------------------------------|
-| [discipline.md](../foundations/packages/core/conduct/discipline.md) | think-first, simplicity, surgical edits, goal-driven loops |
-| [context.md](../foundations/packages/core/conduct/context.md)       | attention-budget hygiene, U-curve, checkpoint protocol     |
-| [verification.md](../foundations/packages/core/conduct/verification.md) | baseline snapshots, dry-run, post-change diff read-back |
-| [delegation.md](../foundations/packages/core/conduct/delegation.md)     | subagent contracts, tool whitelisting, parallel rules    |
-| [failure-modes.md](../foundations/packages/core/conduct/failure-modes.md) | F01-F14 taxonomy                                       |
-| [tool-use.md](../foundations/packages/core/conduct/tool-use.md)         | right-tool-first-try, parallel vs. serial               |
-| [formatting.md](../foundations/packages/skills/conduct/formatting.md)     | XML/Markdown/minimal/few-shot, prefill + stop seq.      |
-| [skill-authoring.md](../foundations/packages/skills/conduct/skill-authoring.md) | SKILL.md frontmatter discipline                    |
-| [hooks.md](../foundations/packages/core/conduct/hooks.md)               | advisory-only, injection over denial, fail-open         |
-| [precedent.md](../foundations/packages/core/conduct/precedent.md)       | log self-observed failures, consult before risky steps  |
-| [tier-sizing.md](../foundations/packages/core/conduct/tier-sizing.md)   | Opus intent-level, Sonnet decomposed, Haiku step-by-step|
-| [web-fetch.md](../foundations/packages/web/conduct/web-fetch.md)       | WebFetch is Haiku-tier-only; cache and budget           |
-| [inference-substrate.md](shared/foundations/conduct/inference-substrate.md) | inference-engine emit-only contract        |
+| [discipline.md](../vis/packages/core/conduct/discipline.md) | think-first, simplicity, surgical edits, goal-driven loops |
+| [context.md](../vis/packages/core/conduct/context.md)       | attention-budget hygiene, U-curve, checkpoint protocol     |
+| [verification.md](../vis/packages/core/conduct/verification.md) | baseline snapshots, dry-run, post-change diff read-back |
+| [delegation.md](../vis/packages/core/conduct/delegation.md)     | subagent contracts, tool whitelisting, parallel rules    |
+| [failure-modes.md](../vis/packages/core/conduct/failure-modes.md) | F01-F14 taxonomy                                       |
+| [tool-use.md](../vis/packages/core/conduct/tool-use.md)         | right-tool-first-try, parallel vs. serial               |
+| [formatting.md](../vis/packages/skills/conduct/formatting.md)     | XML/Markdown/minimal/few-shot, prefill + stop seq.      |
+| [skill-authoring.md](../vis/packages/skills/conduct/skill-authoring.md) | SKILL.md frontmatter discipline                    |
+| [hooks.md](../vis/packages/core/conduct/hooks.md)               | advisory-only, injection over denial, fail-open         |
+| [precedent.md](../vis/packages/core/conduct/precedent.md)       | log self-observed failures, consult before risky steps  |
+| [tier-sizing.md](../vis/packages/core/conduct/tier-sizing.md)   | Opus intent-level, Sonnet decomposed, Haiku step-by-step|
+| [web-fetch.md](../vis/packages/web/conduct/web-fetch.md)       | WebFetch is Haiku-tier-only; cache and budget           |
+| [inference-substrate.md](shared/vis/conduct/inference-substrate.md) | inference-engine emit-only contract        |
 
 ## Architecture
 
@@ -288,7 +288,7 @@ Gorgon follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html). Break
 
 Pull requests welcome. Key rules:
 
-- Do not edit `shared/foundations/conduct/*.md` in a Gorgon PR; raise the change in the [schematic](https://github.com/enchanter-ai/schematic) repo so it propagates to every sibling.
+- Do not edit `shared/vis/conduct/*.md` in a Gorgon PR; raise the change in the [schematic](https://github.com/enchanter-ai/schematic) repo so it propagates to every sibling.
 - Every new engine needs an Author-Year docstring citation and a `docs/science/README.md` section.
 - Every hook script opens with the subagent-loop guard and exits 0 fail-open.
 - Honest-numbers contract on every advisory: no N, no advisory.

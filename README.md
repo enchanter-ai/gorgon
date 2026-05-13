@@ -163,7 +163,7 @@ Or cherry-pick: `/plugin install gorgon-hotspots@gorgon`.
 ```bash
 git clone https://github.com/enchanter-ai/gorgon
 cd gorgon
-./scripts/bootstrap.sh    # canonical first command — installs enchanter-foundations sibling
+./scripts/bootstrap.sh    # canonical first command — installs foundations sibling
 ```
 
 Without `./scripts/bootstrap.sh`, conduct imports will silently miss and Claude Code's `@`-loader will fail-soft. Always bootstrap first.
@@ -250,18 +250,18 @@ applied across all plugins.
 
 | Module                         | What it governs                                                            |
 |--------------------------------|----------------------------------------------------------------------------|
-| [discipline.md](../enchanter-foundations/packages/core/conduct/discipline.md) | think-first, simplicity, surgical edits, goal-driven loops |
-| [context.md](../enchanter-foundations/packages/core/conduct/context.md)       | attention-budget hygiene, U-curve, checkpoint protocol     |
-| [verification.md](../enchanter-foundations/packages/core/conduct/verification.md) | baseline snapshots, dry-run, post-change diff read-back |
-| [delegation.md](../enchanter-foundations/packages/core/conduct/delegation.md)     | subagent contracts, tool whitelisting, parallel rules    |
-| [failure-modes.md](../enchanter-foundations/packages/core/conduct/failure-modes.md) | F01-F14 taxonomy                                       |
-| [tool-use.md](../enchanter-foundations/packages/core/conduct/tool-use.md)         | right-tool-first-try, parallel vs. serial               |
-| [formatting.md](../enchanter-foundations/packages/skills/conduct/formatting.md)     | XML/Markdown/minimal/few-shot, prefill + stop seq.      |
-| [skill-authoring.md](../enchanter-foundations/packages/skills/conduct/skill-authoring.md) | SKILL.md frontmatter discipline                    |
-| [hooks.md](../enchanter-foundations/packages/core/conduct/hooks.md)               | advisory-only, injection over denial, fail-open         |
-| [precedent.md](../enchanter-foundations/packages/core/conduct/precedent.md)       | log self-observed failures, consult before risky steps  |
-| [tier-sizing.md](../enchanter-foundations/packages/core/conduct/tier-sizing.md)   | Opus intent-level, Sonnet decomposed, Haiku step-by-step|
-| [web-fetch.md](../enchanter-foundations/packages/web/conduct/web-fetch.md)       | WebFetch is Haiku-tier-only; cache and budget           |
+| [discipline.md](../foundations/packages/core/conduct/discipline.md) | think-first, simplicity, surgical edits, goal-driven loops |
+| [context.md](../foundations/packages/core/conduct/context.md)       | attention-budget hygiene, U-curve, checkpoint protocol     |
+| [verification.md](../foundations/packages/core/conduct/verification.md) | baseline snapshots, dry-run, post-change diff read-back |
+| [delegation.md](../foundations/packages/core/conduct/delegation.md)     | subagent contracts, tool whitelisting, parallel rules    |
+| [failure-modes.md](../foundations/packages/core/conduct/failure-modes.md) | F01-F14 taxonomy                                       |
+| [tool-use.md](../foundations/packages/core/conduct/tool-use.md)         | right-tool-first-try, parallel vs. serial               |
+| [formatting.md](../foundations/packages/skills/conduct/formatting.md)     | XML/Markdown/minimal/few-shot, prefill + stop seq.      |
+| [skill-authoring.md](../foundations/packages/skills/conduct/skill-authoring.md) | SKILL.md frontmatter discipline                    |
+| [hooks.md](../foundations/packages/core/conduct/hooks.md)               | advisory-only, injection over denial, fail-open         |
+| [precedent.md](../foundations/packages/core/conduct/precedent.md)       | log self-observed failures, consult before risky steps  |
+| [tier-sizing.md](../foundations/packages/core/conduct/tier-sizing.md)   | Opus intent-level, Sonnet decomposed, Haiku step-by-step|
+| [web-fetch.md](../foundations/packages/web/conduct/web-fetch.md)       | WebFetch is Haiku-tier-only; cache and budget           |
 | [inference-substrate.md](shared/foundations/conduct/inference-substrate.md) | inference-engine emit-only contract        |
 
 ## Architecture

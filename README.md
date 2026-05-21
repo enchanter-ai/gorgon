@@ -1,7 +1,7 @@
 # Gorgon
 
 <p align="center">
-  <img src="docs/assets/social-preview.jpg" alt="Gorgon mascot" width="1280">
+  <img src="docs/assets/hero.png" alt="Gorgon mascot" width="1280">
 </p>
 
 <p>

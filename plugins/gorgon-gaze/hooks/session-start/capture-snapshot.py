@@ -41,9 +41,66 @@ def _resolve_imports(tree: ast.AST) -> list:
     return out
 
 
+# Stdlib module names — canonical filter (Python >= 3.10).
+# `sys.stdlib_module_names` is a frozenset of every top-level stdlib module.
+_STDLIB = frozenset(getattr(sys, "stdlib_module_names", frozenset()))
+
+
+def _build_module_index(root: Path, py_files: list) -> dict:
+    """Map dotted-module name -> rel path for every *.py file under root.
+
+    Both `pkg.sub.mod` and `pkg.sub` (for `__init__.py`) are indexed so an
+    `import pkg.sub` resolves to the package file.
+    """
+    index: dict = {}
+    for rel in py_files:
+        parts = list(Path(rel).with_suffix("").parts)
+        if not parts:
+            continue
+        if parts[-1] == "__init__":
+            parts = parts[:-1]
+            if not parts:
+                continue
+        dotted = ".".join(parts)
+        index[dotted] = rel
+        # Also index the leaf name so a bare `import g3_pagerank` (when
+        # shared/scripts is on sys.path) resolves to its file.
+        leaf = parts[-1]
+        index.setdefault(leaf, rel)
+    return index
+
+
+def _filter_imports(raw: list, module_index: dict) -> list:
+    """Drop stdlib + unresolved (third-party / unknown) imports.
+
+    A raw import name like `engines.g3_pagerank` resolves first by full dotted
+    match, then by progressively trimming trailing components (covers
+    `from engines.g3_pagerank import pagerank` -> module `engines.g3_pagerank`,
+    and `import a.b.c` when only `a.b` is a repo file).
+    """
+    kept = []
+    for name in raw:
+        top = name.split(".", 1)[0]
+        if top in _STDLIB:
+            continue
+        parts = name.split(".")
+        resolved = None
+        while parts:
+            candidate = ".".join(parts)
+            if candidate in module_index:
+                resolved = module_index[candidate]
+                break
+            parts.pop()
+        if resolved is None:
+            continue
+        kept.append(resolved)
+    return kept
+
+
 def _walk_repo(root: Path) -> dict:
-    adj: dict = {}
+    raw_adj: dict = {}
     failures_path = PLUGIN_ROOT / "state" / "parse-failures.jsonl"
+    py_files: list = []
     for p in root.rglob("*.py"):
         rel = str(p.relative_to(root))
         try:
@@ -51,7 +108,11 @@ def _walk_repo(root: Path) -> dict:
         except (SyntaxError, ValueError) as exc:
             append_jsonl(failures_path, {"path": rel, "error": str(exc)})
             continue
-        adj[rel] = _resolve_imports(tree)
+        raw_adj[rel] = _resolve_imports(tree)
+        py_files.append(rel)
+
+    module_index = _build_module_index(root, py_files)
+    adj: dict = {rel: _filter_imports(raw, module_index) for rel, raw in raw_adj.items()}
     return adj
 
 

@@ -140,5 +140,42 @@ class TestBootstrapCI(unittest.TestCase):
         self.assertEqual(n, 8)
 
 
+class TestBootstrapCIHotspotsPath(unittest.TestCase):
+    """Exercise the code path the /gorgon:hotspots skill uses: feed per-function
+    cyclomatic-complexity samples (integers, as produced by G2 McCabe), assert
+    the documented (value, ci_low, ci_high, N) tuple contract, and verify the
+    documented N<=1 collapse behaviour."""
+
+    def test_per_function_complexity_samples_n_ge_2(self):
+        # Mimic complexity scores from one module's functions.
+        complexities = [1, 2, 3, 5, 2, 4, 6, 1, 3, 2]
+        result = bootstrap_ci(complexities)
+        self.assertEqual(len(result), 4)
+        value, ci_low, ci_high, n = result
+        self.assertEqual(n, len(complexities))
+        # Point estimate is the sample mean per documented contract.
+        self.assertAlmostEqual(value, sum(complexities) / len(complexities), places=6)
+        # Percentile-CI envelopes the point estimate.
+        self.assertLessEqual(ci_low, value)
+        self.assertLessEqual(value, ci_high)
+        # Bounds must lie within the sample range (bootstrap of means cannot
+        # exceed [min, max] of the original samples).
+        self.assertGreaterEqual(ci_low, float(min(complexities)))
+        self.assertLessEqual(ci_high, float(max(complexities)))
+        # Types: floats for the band, int for N.
+        self.assertIsInstance(value, float)
+        self.assertIsInstance(ci_low, float)
+        self.assertIsInstance(ci_high, float)
+        self.assertIsInstance(n, int)
+
+    def test_n_le_1_collapse_contract(self):
+        # N == 0: zero-tuple per documented behaviour.
+        self.assertEqual(bootstrap_ci([]), (0.0, 0.0, 0.0, 0))
+        # N == 1: band collapses to the single sample, N reports 1.
+        value, ci_low, ci_high, n = bootstrap_ci([4])
+        self.assertEqual((value, ci_low, ci_high, n), (4.0, 4.0, 4.0, 1))
+        self.assertIsInstance(value, float)
+
+
 if __name__ == "__main__":
     unittest.main()

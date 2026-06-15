@@ -1,0 +1,30 @@
+{
+  "name": "gorgon-complexity",
+  "version": "0.1.0",
+  "description": "Per-function McCabe (G2) plus per-module Halstead (G4) report. Returns top complexity offenders with absolute scores and percentile rank in the repo distribution. Use when the user runs /gorgon:complexity or asks about complex functions.",
+  "author": {
+    "name": "Enchanter Labs"
+  },
+  "license": "MIT",
+  "keywords": [
+    "complexity",
+    "mccabe",
+    "halstead",
+    "cyclomatic"
+  ],
+  "interface": {
+    "displayName": "Gorgon Complexity",
+    "shortDescription": "Per-function McCabe (G2) plus per-module Halstead (G4) report. Returns top comp\u2026",
+    "longDescription": "Per-function McCabe (G2) plus per-module Halstead (G4) report. Returns top complexity offenders with absolute scores and percentile rank in the repo distribution. Use when the user runs /gorgon:complexity or asks about complex functions.",
+    "developerName": "Enchanter Labs",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Use Gorgon Complexity on my project"
+    ]
+  },
+  "skills": "./skills/"
+}

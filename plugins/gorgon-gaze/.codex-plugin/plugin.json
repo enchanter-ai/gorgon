@@ -1,0 +1,30 @@
+{
+  "name": "gorgon-gaze",
+  "version": "0.1.0",
+  "description": "Captures the initial codebase snapshot on SessionStart and refreshes on UserPromptSubmit focus shifts. Runs G1 Tarjan SCC + G3 PageRank over the AST-resolved import graph and persists state/snapshot.json atomically.",
+  "author": {
+    "name": "Enchanter Labs"
+  },
+  "license": "MIT",
+  "keywords": [
+    "snapshot",
+    "import-graph",
+    "tarjan",
+    "pagerank",
+    "structural-intelligence"
+  ],
+  "interface": {
+    "displayName": "Gorgon Gaze",
+    "shortDescription": "Captures the initial codebase snapshot on SessionStart and refreshes on UserPro\u2026",
+    "longDescription": "Captures the initial codebase snapshot on SessionStart and refreshes on UserPromptSubmit focus shifts. Runs G1 Tarjan SCC + G3 PageRank over the AST-resolved import graph and persists state/snapshot.json atomically.",
+    "developerName": "Enchanter Labs",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Use Gorgon Gaze on my project"
+    ]
+  }
+}

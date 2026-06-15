@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "gorgon-gorgon-hotspots-scripts": {
+      "cwd": ".",
+      "command": "python",
+      "args": [
+        "./mcp/server.py"
+      ]
+    }
+  }
+}

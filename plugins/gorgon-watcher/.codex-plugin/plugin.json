@@ -1,0 +1,29 @@
+{
+  "name": "gorgon-watcher",
+  "version": "0.1.0",
+  "description": "Per-edit incremental AST refresh of the touched file plus 1-hop importers. Updates G1 adjacency and recomputes G2 cyclomatic on changed functions; marks dirty nodes for the next gaze.",
+  "author": {
+    "name": "Enchanter Labs"
+  },
+  "license": "MIT",
+  "keywords": [
+    "incremental-refresh",
+    "ast-diff",
+    "cyclomatic",
+    "watcher"
+  ],
+  "interface": {
+    "displayName": "Gorgon Watcher",
+    "shortDescription": "Per-edit incremental AST refresh of the touched file plus 1-hop importers. Upda\u2026",
+    "longDescription": "Per-edit incremental AST refresh of the touched file plus 1-hop importers. Updates G1 adjacency and recomputes G2 cyclomatic on changed functions; marks dirty nodes for the next gaze.",
+    "developerName": "Enchanter Labs",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Use Gorgon Watcher on my project"
+    ]
+  }
+}

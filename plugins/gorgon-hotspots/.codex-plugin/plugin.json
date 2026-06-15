@@ -1,0 +1,31 @@
+{
+  "name": "gorgon-hotspots",
+  "version": "0.1.0",
+  "description": "Top-N hotspot ranking with bootstrap 95% CI per file. Reads state/snapshot.json and returns (path, score, ci_low, ci_high, N, hotspot_kind) tuples. Use when the user runs /gorgon:hotspots or asks which files matter most.",
+  "author": {
+    "name": "Enchanter Labs"
+  },
+  "license": "MIT",
+  "keywords": [
+    "hotspots",
+    "ranking",
+    "centrality",
+    "pagerank"
+  ],
+  "interface": {
+    "displayName": "Gorgon Hotspots",
+    "shortDescription": "Top-N hotspot ranking with bootstrap 95% CI per file. Reads state/snapshot.json\u2026",
+    "longDescription": "Top-N hotspot ranking with bootstrap 95% CI per file. Reads state/snapshot.json and returns (path, score, ci_low, ci_high, N, hotspot_kind) tuples. Use when the user runs /gorgon:hotspots or asks which files matter most.",
+    "developerName": "Enchanter Labs",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Use Gorgon Hotspots on my project"
+    ]
+  },
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json"
+}

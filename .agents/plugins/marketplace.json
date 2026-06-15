@@ -1,0 +1,92 @@
+{
+  "name": "gorgon",
+  "interface": {
+    "displayName": "Gorgon"
+  },
+  "plugins": [
+    {
+      "name": "full",
+      "source": {
+        "source": "local",
+        "path": "./plugins/full"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "gorgon-complexity",
+      "source": {
+        "source": "local",
+        "path": "./plugins/gorgon-complexity"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "gorgon-deps",
+      "source": {
+        "source": "local",
+        "path": "./plugins/gorgon-deps"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "gorgon-gaze",
+      "source": {
+        "source": "local",
+        "path": "./plugins/gorgon-gaze"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "gorgon-hotspots",
+      "source": {
+        "source": "local",
+        "path": "./plugins/gorgon-hotspots"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "gorgon-learning",
+      "source": {
+        "source": "local",
+        "path": "./plugins/gorgon-learning"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "gorgon-watcher",
+      "source": {
+        "source": "local",
+        "path": "./plugins/gorgon-watcher"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

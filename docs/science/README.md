@@ -156,9 +156,11 @@ data-shuffling code that McCabe under-weights.
 
 ## G5 — Gauss Accumulation: Hotspot-Drift Signature
 
-**Reference:** Gauss C.F. (1809), "Theoria motus corporum coelestium in
-sectionibus conicis solem ambientium" (least-squares foundation for
-recursive EMA-with-posterior updates). Ecosystem precedent: Wixie F6,
+**Reference:** Brown R.G. (1956), "Exponential Smoothing for Predicting
+Demand"; Holt C.C. (1957), "Forecasting Trends and Seasonals by
+Exponentially Weighted Moving Averages" (exponential-smoothing
+foundation for the EMA update, paired with a conjugate Beta-Binomial
+posterior for the accept/reject signal). Ecosystem precedent: Wixie F6,
 Emu A7, Crow H6, Djinn D5.
 
 **Signature:** `update_posterior(prior: dict, observation: dict, alpha: float = 0.3) -> dict`

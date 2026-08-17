@@ -222,7 +222,7 @@ Tracked in [docs/ROADMAP.md](docs/ROADMAP.md) and the shared [ecosystem map](htt
 | G2 | McCabe Cyclomatic Complexity          | McCabe T.J. (1976), IEEE TSE SE-2(4):308-320                                           |
 | G3 | PageRank                              | Brin S. & Page L. (1998), Computer Networks 30(1-7):107-117                            |
 | G4 | Halstead Volume                       | Halstead M.H. (1977), "Elements of Software Science", Elsevier North-Holland           |
-| G5 | Gauss Accumulation                    | Gauss C.F. (1809), "Theoria motus corporum coelestium" (least-squares foundation)      |
+| G5 | Gauss Accumulation                    | Brown R.G. (1956) / Holt C.C. (1957), exponential smoothing; conjugate Beta-Binomial posterior |
 
 Full derivations: [`docs/science/README.md`](docs/science/README.md).
 

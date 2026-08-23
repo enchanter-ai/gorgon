@@ -72,9 +72,12 @@ in `docs/science/README.md`. **Defining engine:** G3 PageRank.
 
 Markers: **[H]** hook-enforced (deterministic) · **[A]** advisory (relies on your adherence).
 
-1. **IMPORTANT — Honest-numbers contract on every advisory.** [A] Every emitted
-   `gorgon.hotspot.detected` event and every `/gorgon:hotspots` row carries
-   `(score, ci_low, ci_high, N)`. Missing N → reject the row, never inflate.
+1. **IMPORTANT — Honest-numbers contract on every advisory.** [A] Every
+   `/gorgon:hotspots` row carries `(score, ci_low, ci_high, N)`. Missing N →
+   reject the row, never inflate. (The `gorgon.hotspot.detected` event
+   carries the same tuple by contract, but no hook or skill currently calls
+   `shared/scripts/events/__init__.py` to publish it — see README §"Honest
+   numbers, or no numbers".)
 2. **YOU MUST scope to Python in Phase 1.** [A] Static AST parsing uses stdlib
    `ast` and `tokenize` — Python only. Mixed-language repos: surface the
    limitation in the advisory; do NOT silently ignore non-`*.py` files.

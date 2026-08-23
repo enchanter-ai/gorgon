@@ -19,9 +19,9 @@ Gazes at the repository, freezes its current structure into an immutable snapsho
 
 **6 sub-plugins. 5 engines. 3 agents. 3 slash commands. Out-of-context structural snapshot. One install.**
 
-> Session start, **gorgon-gaze** walks 247 `*.py` files in the repo, builds the import adjacency, and runs **G1 Tarjan** + **G3 PageRank** in 0.4s. Snapshot persists atomically to `state/snapshot.json`. Turn 14, the developer edits `plugins/auth/registry.py`. **gorgon-watcher** re-parses the touched file plus its 6 importers and updates the adjacency without a full re-walk. Turn 22, the developer asks `/gorgon:hotspots`. Top result: `plugins/auth/registry.py — score=0.087, CI=(0.071, 0.103), N=247, kind=coupling` — high import-fan-in, low cyclomatic, classic god-module signature. Turn 38, `/compact` fires — **gorgon-learning** computes drift between this snapshot and the prior, updates the per-(repo × hotspot-kind) Gauss posterior in `state/learnings.jsonl`. Next session, the same hotspot scores against a tighter expected envelope.
+> Session start, **gorgon-gaze** walks 247 `*.py` files in the repo, builds the import adjacency, and runs **G1 Tarjan** + **G3 PageRank** in 0.4s. Snapshot persists atomically to `state/snapshot.json`. Turn 14, the developer edits `plugins/auth/registry.py`. **gorgon-watcher** re-parses the touched file plus its 6 importers and updates the adjacency without a full re-walk. Turn 22, the developer asks `/gorgon:hotspots`. Top result: `plugins/auth/registry.py — score=0.087, CI=(0.071, 0.103), N=247, kind=coupling` — high import-fan-in, low cyclomatic, classic god-module signature. Turn 38, `/compact` fires — **gorgon-learning** folds this snapshot's top score into the per-(repo × hotspot-kind) Gauss posterior in `state/learnings.jsonl` (top-N stability is a placeholder in Phase 1, not yet a real drift measurement — see below). Next session, the same hotspot scores against a tighter expected envelope.
 >
-> Time: deterministic, zero per-turn LLM calls on the critical path. Developer effort: read one ranked list.
+> Time: the background capture path (gorgon-gaze, gorgon-watcher, gorgon-learning) is deterministic — zero per-turn LLM calls. `/gorgon:hotspots` itself is LLM-composed: it spawns a Sonnet labelling pass and an Opus ranking pass on top of the deterministic scores (see [7 Plugins, 3 Agents](#7-plugins-3-agents)). Developer effort: read one ranked list.
 
 ## TL;DR
 
@@ -118,6 +118,12 @@ ChatGPT and Cursor "explain this codebase" sessions bias toward the README, top-
 
 Every advisory carries `(score, ci_low, ci_high, N)` from a non-parametric bootstrap. Missing N → the row is rejected, never emitted with an invented confidence band.
 
+**Known gaps, stated plainly rather than papered over:**
+
+- **`/gorgon:deps` is unsupported / not yet wired.** `gorgon-gaze` computes the file-level import adjacency in memory but only persists `ranks` (and summary counts) to `snapshot.json` — the edge list itself is never written to disk. `deps-query`'s "read the snapshot's adjacency" precondition currently has nothing to read; treat `/gorgon:deps` as not-yet-functional until the snapshot schema is extended to persist edges.
+- **G5 `top_n_stability` is a hardcoded placeholder, not a computed value.** `update-posterior.py` passes `top_n_stability: 1.0` on every observation instead of the Jaccard similarity between this snapshot's top-N hotspot set and the prior one. The posterior's drift signature is not currently meaningful — treat any "stability" reading as "not computed" rather than a real 1.0.
+- **The `gorgon.*` event bus is defined but not published.** `shared/scripts/events/__init__.py` has typed publish helpers for all four topics below, but no hook or skill currently calls them — `gorgon-gaze`, `gorgon-watcher`, and `gorgon-learning` write state files without emitting the corresponding event.
+
 ## The Full Lifecycle
 
 Gorgon is **hook-driven for capture** and **skill-invoked for query**. No phase blocks tool completion.
@@ -144,10 +150,12 @@ Source: [docs/assets/lifecycle.mmd](docs/assets/lifecycle.mmd) · Regeneration c
 | Watch | PostToolUse (Write\|Edit) | `gorgon-watcher` | G1 + G2 | dirty-node list; `gorgon.hotspot.detected` |
 | Learn | PreCompact | `gorgon-learning` | G5 | `state/posterior.json`, `state/learnings.jsonl` |
 | Query — hotspots | `/gorgon:hotspots` | `gorgon-hotspots` | G3 | ranked table with bootstrap CI |
-| Query — deps | `/gorgon:deps <file>` | `gorgon-deps` | G1 | 1-hop / 2-hop neighbourhood |
+| Query — deps | `/gorgon:deps <file>` | `gorgon-deps` | G1 | **unsupported / not yet wired** — snapshot doesn't persist edges (see [Honest numbers, or no numbers](#honest-numbers-or-no-numbers)) |
 | Query — complexity | `/gorgon:complexity` | `gorgon-complexity` | G2 + G4 | per-function McCabe + per-module Halstead |
 
 Every capture phase is hook-driven and fail-open. Every query phase is skill-invoked on demand.
+
+The `gorgon.*` event names in the Output column above are the intended contract, not a confirmed emission — see [Honest numbers, or no numbers](#honest-numbers-or-no-numbers) for the current not-yet-published status.
 
 ## Install
 
@@ -201,7 +209,7 @@ plugins/gorgon-complexity/state/
 └── last-report.json           most recent /gorgon:complexity output
 ```
 
-Events published on the `gorgon.*` namespace (Phase-1 file-tail fallback via shared `publish.py`):
+Events defined on the `gorgon.*` namespace (Phase-1 file-tail fallback via shared `publish.py`) — **not currently published**: the helpers below exist in `shared/scripts/events/__init__.py` but no hook or skill calls them yet:
 
 - `gorgon.snapshot.captured` — `{session_id, repo_root, file_count, edge_count, captured_at}`
 - `gorgon.hotspot.detected` — `{file, score, ci_low, ci_high, N, rank, hotspot_kind}`

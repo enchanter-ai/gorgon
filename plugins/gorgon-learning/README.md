@@ -14,4 +14,5 @@ score into the per-(repo x hotspot-kind) posterior via G5, write
 ## Outputs
 
 - `state/posterior.json` — `{repo: {kind: {median_score, sigma, n_snapshots, top_n_stability, last_seen}}}`.
+  **Phase-1 note:** `top_n_stability` is currently always `null` ("not computed"), not a real Jaccard similarity — `snapshot.json` doesn't yet persist the prior snapshot's top-N hotspot set needed to compute it. Do not read it as a genuine stability signal.
 - `state/learnings.jsonl` — one row per compaction event.

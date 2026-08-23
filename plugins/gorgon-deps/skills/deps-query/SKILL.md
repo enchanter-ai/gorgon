@@ -12,6 +12,12 @@ tools: [Read, Grep, Glob]
 
 # deps-query
 
+> **Status: unsupported / not yet wired.** `snapshot.json` currently persists
+> only `ranks` and summary counts — the import adjacency is computed in
+> `gorgon-gaze` but never written to disk. Step 2 below has no snapshot field
+> to read yet. Tell the user this command is not functional in Phase 1
+> instead of fabricating an empty or partial result.
+
 ## Preconditions
 
 - `plugins/gorgon-gaze/state/snapshot.json` exists.

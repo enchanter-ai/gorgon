@@ -39,12 +39,18 @@ def main() -> int:
     now = datetime.now(timezone.utc).isoformat()
     for kind in kinds:
         prior = posteriors.get(repo_key, {}).get(kind, {})
+        # Phase-1 placeholder: `snapshot.json` does not persist the prior
+        # snapshot's top-N hotspot set, so the true Jaccard-similarity
+        # top_n_stability cannot be computed here yet. Marking it None
+        # (rather than a fabricated 1.0) so consumers of posterior.json can
+        # tell "not computed" apart from a real, perfectly-stable reading.
         observation = {
             "hotspot_score": top_score,
-            "top_n_stability": 1.0,
+            "top_n_stability": 0.0,  # unused placeholder input; see override below
             "captured_at": now,
         }
         new_post = update_posterior(prior, observation)
+        new_post["top_n_stability"] = None  # not computed — see comment above
         posteriors.setdefault(repo_key, {})[kind] = new_post
 
     atomic_write_json(posterior_path, posteriors)

@@ -5,8 +5,7 @@ updates:
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 5
-  - package-ecosystem: "pip"
-    directory: "/"
-    schedule:
-      interval: "weekly"
-    open-pull-requests-limit: 5
+  # pip ecosystem removed 2026-08-23: gorgon ships no Python dependency manifest
+  # (stdlib-only scripts), so Dependabot reported dependency_file_not_found and
+  # the job failed on every run. Re-add with the correct `directory:` if a
+  # requirements.txt / pyproject.toml is ever introduced.

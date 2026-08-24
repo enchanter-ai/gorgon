@@ -120,7 +120,6 @@ Every advisory carries `(score, ci_low, ci_high, N)` from a non-parametric boots
 
 **Known gaps, stated plainly rather than papered over:**
 
-- **`/gorgon:deps` is unsupported / not yet wired.** `gorgon-gaze` computes the file-level import adjacency in memory but only persists `ranks` (and summary counts) to `snapshot.json` — the edge list itself is never written to disk. `deps-query`'s "read the snapshot's adjacency" precondition currently has nothing to read; treat `/gorgon:deps` as not-yet-functional until the snapshot schema is extended to persist edges.
 - **G5 `top_n_stability` is a hardcoded placeholder, not a computed value.** `update-posterior.py` passes `top_n_stability: 1.0` on every observation instead of the Jaccard similarity between this snapshot's top-N hotspot set and the prior one. The posterior's drift signature is not currently meaningful — treat any "stability" reading as "not computed" rather than a real 1.0.
 - **The `gorgon.*` event bus is defined but not published.** `shared/scripts/events/__init__.py` has typed publish helpers for all four topics below, but no hook or skill currently calls them — `gorgon-gaze`, `gorgon-watcher`, and `gorgon-learning` write state files without emitting the corresponding event.
 

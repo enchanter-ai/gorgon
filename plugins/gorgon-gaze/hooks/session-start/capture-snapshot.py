@@ -134,6 +134,7 @@ def main() -> int:
         "scc_count": len(sccs),
         "nontrivial_scc_count": len(nontrivial),
         "ranks": ranks,
+        "adjacency": adj,
         "duration_ms": int((time.time() - started) * 1000),
     }
 
